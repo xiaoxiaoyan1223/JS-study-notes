@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+    }
+</style>
+<body>
+    <div>
+        <a href="http//:baidu.com">百度一下，你就知道</a>
+    </div>
+    <script>
+        // 1、常见事件对象的属性和方法
+        // 1、返回事件类型
+        var div=document.querySelector('div')
+        div.addEventListener('click',fn);
+        div.addEventListener('mouseover',fn)
+        function fn(e) {
+            console.log(e.type);
+        }
+        // 2、阻止默认行为事件
+        var a=document.querySelector('a');
+        a.addEventListener('click',function(e) {
+            e.preventDefault();//低版本具有兼容性问题
+        })
+        // 3、传统注册方法
+        a.onclick=function(e) {
+            e.preventDefault();//普通浏览器
+            e.returnValue;//低版本
+        }
+    </script>
+</body>
+</html>

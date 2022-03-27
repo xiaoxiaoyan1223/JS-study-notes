@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .page{
+        width: 200px;
+        height: 200px;
+    }
+    
+    .big {
+        display: none;
+        position: relative;
+        font-size: 20px;
+        width: 200px;
+        height: 50px;
+        background-color: antiquewhite;
+        margin-bottom: 10px;
+    }
+    .sanjiao {
+        /* background-color: blue; */
+        top: 50px;
+        left: 20px;
+        position: relative;
+        width: 0px;
+        height: 0px;
+        border: 10px solid transparent;
+        border-top-color: antiquewhite;
+    }
+    input {
+        width: 200px;
+        height: 30px;
+        /* outline: none;s */
+        border: 0;
+        background-color: aquamarine;
+    }
+</style>
+<body>
+    <div class="page">
+        <div class="big">
+            <div class="sanjiao"></div>
+        </div>
+        <input type="search" placeholder="智能家居">
+    </div>
+    
+    <script>
+        var input=document.querySelector('input');
+        var big=document.querySelector('.big');
+        var sanjiao=document.querySelector('.sanjiao')
+        document.addEventListener('keyup',function(e){
+            // console.log(e.keyCode);
+            if(e.keyCode===83) {//按下s键自动将光标定到搜索框
+                input.focus();
+               
+            }
+            // console.log('输入内容了');
+            
+            
+        })
+        input.addEventListener('keyup',function(){
+            if(this.value=='') {
+                big.style.display='none';
+            }
+            else {
+                big.style.display ='block';
+            sanjiao.style.display='block';
+            big.innerText =this.value;
+            }
+        })
+        input.addEventListener('blur',function(){
+            big.style.display='none'
+        }) 
+        input.addEventListener('focus',function(){
+            if(this.value!==''){
+                big.style.display='block';
+            }
+        })   
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var num=10;
+        fun();
+        function fun() {
+            console.log(num);
+            var num=20;
+       }
+        // 执行过程
+        // var num;
+        // function fun() {
+            // var num;
+        //     console.log(num);就近上面的num没有值 所以是undefined
+        //     var num=20;
+        // }
+        // num=10;
+        // fun()
+        var num=10;
+        function fn() {
+            console.log(num);
+            var num=20;
+            console.log(num);
+        }
+        fn();
+        //执行过程
+        // var num;
+        // function fn() {
+        //     // 函数内部也要提升变量
+        //     var num;
+        //     console.log(num);
+        //     num=20;
+        //     console.log(num);
+        // }//不执行
+        // num=10;
+        // fn();
+            var a=18;
+            f1();
+            function f1() {
+                var b=9;
+                console.log(a);
+                console.log(b);
+                var a='123'
+            }
+            // undefined  9
+            f1();
+            console.log(c);
+            console.log(b);
+            console.log(a);
+            function f1() {
+                var a=b=c=9;
+                console.log(a);
+                console.log(b);
+                console.log(c);
+            }
+            // 执行过程
+            function f1() {
+                var a=b=c=9;
+               // var a=9;b=9;c=9; //b和c没有var声明，直接赋值的当全局变量看待
+               // var a=9,b=9,c=9;  集体声明
+                console.log(a);//9
+                console.log(b);//9
+                console.log(c);//9
+            }
+            f1();
+            console.log(c);//9
+            console.log(b);//9
+            console.log(a); //not defined
+    </script>
+</body>
+</html>

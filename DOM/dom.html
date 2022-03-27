@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        .father {
+            background-color: rgb(184, 73, 73);
+            width: 200px;
+            height: 200px;
+            padding: 50px;
+        }
+        .son {
+            background-color: aqua;
+            height: 100px;
+            width: 100px;
+            margin: auto auto;
+        }
+        div {
+            width: 300px;
+            height: 50px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    
+    <button>我不这样认为</button>
+    <button>那必须</button>
+    <div class="father">
+        <div class="son">
+
+        </div>
+    </div>
+    <div></div>
+    <script>
+        // 传统的注册方式 无兼容性问题 
+         //var btns = document.querySelectorAll('button');
+        // btns[0].onclick = function() {
+        //     alert('hi')
+        // }
+        // //addEventListener里面的事件类型是字符串 必定加引号，切记不带on
+        // btns[1].addEventListener('click',function() {
+        //     alert('hello')
+        // })
+        // 解绑的效果，只弹出一次对话框
+        // 1、传统的
+        // var btns = document.querySelectorAll('button');
+        // btns[0].onclick=function() {
+        //     alert('我只弹出一次哦');
+        //     btns[0].onclick=null;
+        // }
+        // // 2、addEventListener
+        // btns[1].addEventListener('click',fn)//直接跟fn函数绑定
+        // function fn() {
+        //     alert('hello');
+        //     btns[1].removeEventListener('click',fn);
+        //  }
+        // dom事件流  捕获阶段和冒泡阶段
+        // var father=document.querySelector('.father');
+        // father.addEventListener('click',function() {
+        //     alert('father');
+        // },true);
+        // var son=document.querySelector('.son');
+        // father.addEventListener('click',function() {
+        //     alert('son');
+        // },true);
+        // var son=document.querySelector('.son');
+        // father.addEventListener('click',function() {
+        //     alert('son');
+        // },false);
+        // var father=document.querySelector('.father');
+        // father.addEventListener('click',function() {
+        //     alert('father');
+        // },false); 
+        // 常见的事件对象属性和方法
+        // 1、this返回的是绑定事件的对象  e.target返回的是触发事件的对象
+        // 比如ul绑定了this  点ul里的li返回的是ul
+        // 而e.target返回的是li
+        
+        var ul=document.querySelector('ul');
+        ul.addEventListener('click',function(e){
+            console.log(this);
+            console.log(e.target);
+        })
+        // 2、解决IE678兼容性问题
+        div.onclick=function(e) {
+            e=e || window.event;
+            var target=e.target || e.srcElement;
+            console.log(target);
+        }
+        //事件委托的原理   不是每个子节点单独设置监听器，而是事件监听器设置在父节点上，然后利用冒泡原理影响设置每个子节点
+        
+    </script>
+</body>
+</html>
