@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <style>
+       thead th {
+           height: 40px;
+           width: 80px;
+           background-color: darkgray;
+           border: 1px solid #ccc;
+           margin: 0;
+       }
+       table {
+           margin: 0 auto;
+           border-collapse: collapse;
+       }
+       tbody td {
+        width: 80px;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #ccc;
+       }
+   </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>黎明</td>
+                <td>js</td>
+                <td>100</td>
+                <td>删除</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        var dates=[
+            {
+               name:'黎明' ,
+               subject:'js',
+               score:100
+            },
+            {
+               name:'黎明' ,
+               subject:'js',
+               score:100
+            },
+            {
+               name:'黎明' ,
+               subject:'js',
+               score:100
+            },
+        ];
+        var tbody=document.querySelector('tbody');
+        for(var i=0;i<dates.length;i++){
+            var tr=document.createElement('tr');
+            tbody.appendChild(tr);
+            
+            for(var k in dates[i]){
+                var td=document.createElement('td');
+                tr.appendChild(td);
+                td.innerHTML=dates[i][k];
+            }
+            var td=document.createElement('td');
+            td.innerHTML='<a href="iavascript:;">删除</a>';
+            tr.appendChild(td);
+        }
+        var as=document.querySelectorAll('a');
+                for(var i=0;i<as.length;i++){
+                    as[i].onclick=function(){
+                        tbody.removeChild(this.parentNode.parentNode);
+                        //node.removeChild(child);
+                    }
+                }
+        
+    </script>
+</body>
+</html>

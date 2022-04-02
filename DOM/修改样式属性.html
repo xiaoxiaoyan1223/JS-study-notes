@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(163, 40, 40);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        我是红色的
+    </div>
+    <script>
+        var div=document.querySelector('.box')
+        div.onclick=function(){
+            div.style.backgroundColor='pink';
+            div.innerText='我是粉色的了';
+        }
+
+        //如果样式修改比较多，修改元素的className（从新给盒子一个类名）更改元素样式，但是会覆盖原先类名
+        //如果想要保留原先的类名  可以使用多类名选择器
+    </script>
+</body>
+</html>

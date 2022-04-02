@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 300px;
+            display: block;
+            
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="box">
+        想知道日期吗？
+        <button>显示当前系统时间</button>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div> -->
+    <button class="k">王俊凯</button>
+    <button class="y">王源</button>
+    <button class="q">易烊千玺</button>
+    <img src="../images/小凯.jpg" alt="" title="小凯">
+    <script>
+        // var  btn=document.querySelector('button');
+        // var  div=document.querySelector('.box')
+        // btn.onclick=function(){
+        //      div.innerText='2022年3月31日';
+        //     //interText 不识别html标签  非标准  获取元素内容时去除空格和换行
+        //     //interHTML可以识别标签  用的比较多  获取元素内容保留标签  空格  换行
+        //     div.innerHTML='<strong>今天是：</strong>2022年3月31日';
+        // }
+            var k=document.querySelector('.k');
+            var y=document.querySelector('.y');
+            var q=document.querySelector('.q');
+            var photo=document.querySelector('img')
+            k.onclick=function(){
+                photo.src='../images/小凯.jpg';
+            }
+            y.onclick=function(){
+                photo.src='../images/小源.jpg';
+                photo.title='小源';
+            }
+            q.onclick = function(){
+                photo.src='../images/千玺.jpg';
+                photo.title='千玺';
+            }
+
+
+
+        
+    </script>
+</body>
+</html>

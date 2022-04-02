@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <button id="b">登录</button>
+    </div>
+    <script>
+        //事件处理程序 一般通过函数赋值的方法完成
+        var btn=document.querySelector('#b');//1、获取
+        btn.onclick = function() {//2、添加事件处理程序
+            alert('我知道了');
+        }
+    </script>
+</body>
+</html>

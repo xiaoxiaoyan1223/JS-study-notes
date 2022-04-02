@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        textarea {
+            outline: none;
+            bottom: 0;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            position: relative;
+            width: 300px;
+            list-style: none;
+            background-color: aquamarine;
+            margin: 10px 0;
+        }
+        a {
+            position: absolute;
+            right: 3px;
+            color: azure;
+            font-size: 12px;
+            text-decoration: none;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <textarea name="" id="" cols="30" rows="10" placeholder="留下您想说的吧"></textarea>
+    <button>发布</button>
+    <ul>
+        <!-- <li>123</li> -->
+    </ul>
+    <script>
+        // 1、获取元素
+        var btn=document.querySelector('button');
+        var ul=document.querySelector('ul');
+        var text=document.querySelector('textarea');
+        btn.onclick=function(){
+            console.log('3');
+            if(text.value=='')
+            {
+                alert("您还没有输入内容");
+                return false;
+            }
+            else {
+                var li=document.createElement('li');//创建元素
+                ul.appendChild(li);//添加元素
+                //ul.insertBefore(li,ul.children[0]); 表示留言发布在最前面
+                li.innerHTML=text.value+"<a href='javascript:;'>删除</a>";//阻止连接跳转
+                //删除留言
+                var as=document.querySelectorAll('a');
+                for(var i=0;i<as.length;i++){
+                    as[i].onclick=function(){
+                        ul.removeChild(this.parentNode);
+                        //node.removeChild(child);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

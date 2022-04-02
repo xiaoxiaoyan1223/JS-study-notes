@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab栏</title>
+    <style>
+        .tab {
+            margin: 0 auto;
+        }
+        .tab_list {
+            overflow: hidden;
+            margin-left: 200px;
+        }
+        .tab_con {
+            margin-left: 240px;
+            margin-top: 20px;
+        }
+        li {
+            /* margin-left: 20px; */
+            list-style: none;
+            width: 100px;
+            height: 30px;
+            float: left;
+            /* border: 1px solid rgb(238, 34, 34); */
+            text-align: center;
+            line-height: 30px;
+            background-color: azure;
+        }
+        .current {
+            background-color: rgb(136, 49, 49);
+            color: aliceblue;
+        }
+        /* li:hover {
+            color: brown;
+        } */
+        .item {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li class="current">商品介绍</li>
+                <li>规格与包装</li>
+                <li>售后保障</li>
+                <li>商品评价</li>
+                <li>手机社区</li>
+            </ul>
+        </div>
+        
+        <div class="tab_con">
+            <div class="item" style="display: block;">
+                    商品介绍模块
+            </div>
+            <div class="item">
+                规格与包装模块
+            </div>
+            <div class="item">
+                售后保障模块
+            </div>
+            <div class="item">
+                商品评价模块
+            </div>
+            <div class="item">
+                手机社区模块
+            </div>
+        </div>
+    </div>
+    <script>
+        var tab_list=document.querySelector('.tab_list')
+        var lis=tab_list.querySelectorAll('li');
+        //姐妹，选类选择器时，一定要记得加点呀
+        var items=document.querySelectorAll('.item');
+        // console.log(items);
+        for(var i=0;i<lis.length;i++)
+        {
+            //给五个li设置索引号
+            lis[i].setAttribute('index',i);//添加属性来获取索引号
+           lis[i].onclick=function(){
+               for(var i=0;i<lis.length;i++)
+               {
+                   //排他思想
+                    lis[i].className='';
+                    // lis[i].style.backgroundColor='red'
+               }
+               this.className='current';
+               var index=this.getAttribute('index');
+               console.log(index);
+               for(var i=0;i<items.length;i++)
+               {
+                   //排他思想
+                   items[i].style.display='none';
+               }
+               items[index].style.display='block';
+           }
+           
+        }
+    </script>
+</body>
+</html>
