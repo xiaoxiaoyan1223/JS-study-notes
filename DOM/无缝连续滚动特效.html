@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    section {
+        width: 400px;
+        height: 60px;
+        margin: 0 350px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    div {
+        font-size: 25px;
+        line-height: 60px;
+        color: aliceblue;
+        text-align: center;
+        float: left;
+        width: 80px;
+        height: 60px;
+        padding: 5px 0;
+    }
+    .f {
+        background-color: rgb(174, 55, 55);
+    }
+    .s {
+        background-color: aqua;
+    }
+    .t {
+        background-color: rgb(28, 63, 40);
+    }
+    .o {
+        background-color: lightcoral;
+    }
+    .v {
+        background-color: blue;
+    }
+</style>
+<body>
+    <section>
+        <div class="f">1</div>
+        <div class="s">2</div>
+        <div class="t">3</div>
+        <div class="o">4</div>
+        <div class="v">5</div>
+    </section>
+    <script>
+        var img=document.querySelector('div');
+        var section=document.querySelector('section');
+        //复制多一遍的div
+        section.innerHTML+=section.innerHTML;
+        var left=0;
+        var timer;
+        move();
+       function move() {
+           //设表先关，防止动画累积
+           clearInterval(timer);
+          timer=setInterval(function(){
+            left-=4;
+            if(left<-200)
+            {
+                left=0;
+            }
+            section.style.left=left+'px';
+        },20);
+       }
+       
+        //鼠标进入停止定时器
+        section.onmouseenter=function(){
+            clearInterval(timer);
+        }
+        //鼠标离开继续定时器
+        section.onmouseleave=function(){
+            move();
+        }
+
+
+    </script>
+</body>
+</html>

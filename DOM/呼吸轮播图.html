@@ -1,0 +1,111 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .carousel {
+            width: 306px;
+            height: 459px;
+            margin: 50px auto;
+            position: relative;
+            border: 1px solid #ccc;
+            /* overflow: hidden; */
+        }
+        .carousel ul {
+            /* width: 2000px; */
+            list-style: none;
+            /* position: relative; */
+            /* left: 0; */
+            /* transition: left 1s ease 0s; */
+            
+        }
+        .carousel ul li {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* float: left; */
+            /* 透明度都是零 */
+            opacity: 0;
+            transition :opacity .7s ease;
+        }
+        .carousel ul li:first-child {
+            opacity: 1;
+        }
+        .leftbtn {
+            position:absolute;
+            left: 6px;
+            width: 30px;
+            top: 50%;
+            height: 30px;
+            border-radius: 50%;
+            background-color: coral;
+        }
+        .rightbtn {
+            position: absolute;
+            top: 50%;
+            left: 250px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: coral;
+        }
+    </style>
+ </head>
+ <body>
+    <div class="carousel">
+        <ul>
+            <li><img src="../images/千玺.jpg" alt=""></li>
+            <li><img src="../images/小凯.jpg" alt=""></li>
+            <li><img src="../images/小源.jpg" alt=""></li>
+            
+        </ul>
+        <a href="javascript:;" class="leftbtn"></a>
+        <a href="javascript:;" class="rightbtn"></a>
+    </div>
+    <script>
+       var btnl=document.querySelector('.leftbtn');
+       var btnr=document.querySelector('.rightbtn');
+        var ul=document.querySelector('ul');
+        var lis=ul.getElementsByTagName('li');
+        var idx=0;
+        var lock=true;
+        btnr.addEventListener('click',function(){
+            if(!lock) return;
+            lock=false;
+            lis[idx].style.opacity=0;
+            idx++;
+            if(idx>2)
+            {
+                idx=0;
+            }
+            lis[idx].style.opacity=1;
+            setTimeout(function(){
+                lock=true;
+            },1000);
+        })
+        btnl.addEventListener('click',function(){
+            if(!lock) return;
+            lock=false;
+            lis[idx].style.opacity=0;
+            idx--;
+            if(idx<0)
+            {
+                idx=2;
+            }
+            
+            lis[idx].style.opacity=1;
+            setTimeout(function(){
+                lock=true;
+            },1000);
+        })
+        
+    </script>
+ </body>
+ </html>

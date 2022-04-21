@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .carousel {
+            width: 306px;
+            height: 459px;
+            margin: 50px auto;
+            position: relative;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+        .carousel ul {
+            /* width: 2000px; */
+            list-style: none;
+            /* position: relative; */
+            /* left: 0; */
+            /* transition: left 1s ease 0s; */
+            
+        }
+        .carousel ul li {
+            position: absolute;
+            /* top: 0; */
+            /* left: 0; */
+            /* float: left; */
+            /* 透明度都是零 */
+            opacity: 0;
+        }
+        .carousel ul li:first-child {
+            opacity: 1;
+        }
+        .leftbtn {
+            position:absolute;
+            left: 6px;
+            width: 30px;
+            top: 50%;
+            height: 30px;
+            border-radius: 50%;
+            background-color: coral;
+        }
+        .rightbtn {
+            position: absolute;
+            top: 50%;
+            left: 250px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: coral;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <ul>
+            <li><img src="../images/千玺.jpg" alt=""></li>
+            <li><img src="../images/小凯.jpg" alt=""></li>
+            <li><img src="../images/小源.jpg" alt=""></li>
+            
+        </ul>
+        <a href="javascript:;" class="leftbtn"></a>
+        <a href="javascript:;" class="rightbtn"></a>
+    </div>
+    <script>
+        //1、得到按钮
+        var btnl=document.querySelector('.leftbtn');
+        var btnr=document.querySelector('.rightbtn');
+        var ul=document.querySelector('ul');
+        var left=0;
+        var timer;
+        
+            // btnr.addEventListener('click',function(){
+            //     left-=306;
+            //     ul.style.left=left+'px';
+            //     console.log(6);
+            // });
+            //克隆第一张图片
+            var cloneli=ul.firstElementChild.cloneNode(true);
+            ul.appendChild(cloneli);
+            var idx=0;
+            //节流锁
+            var lock=true;
+            //监听
+            btnr.onclick=function() {
+                //判断锁的状态
+                if(!lock) return; //如果锁是关着的就什么也不做
+                lock=false;
+                console.log(2);
+                ul.style.transition='left 1s ease 0s';
+                idx++;
+                if(idx>2) {
+                    //设置一个延时器功能，将ul瞬间拉回0的位置   延时器的目的就是让过渡动画结束之后取消过渡  因为要瞬间移动
+                    setTimeout(function(){
+                        //因为要瞬间移动  所以要去掉过渡属性
+                        ul.style.transition='none';
+                        ul.style.left=0;
+                        idx=0;
+                    });
+                }
+                ul.style.left=-idx*306+'px';
+                setTimeout(function() {
+                    lock=true;
+                },500)
+            }
+             //左边监听器
+             btnl.onclick=function() {
+                 if(!lock) return;
+                 lock=false;
+                 //取消掉过渡，因为要的是瞬间移动，不是咕噜回去
+                 if(idx==0)
+                 {
+                     ul.style.transition='none';
+                     ul.style.left=-2*306+'px';
+                     //设置一个延时器，这个延时器的时间可以是0毫秒，虽然是0毫秒，但是可以让我们过渡先是是瞬间取消，然后再加上
+                     setTimeout(function() {
+                         ul.style.transition='left 1s ease 0s';
+                         idx=3;
+                         ul.style.left=-idx*306+'px';
+                     },0);
+
+                 }else {
+                     idx--;
+                     ul.style.left=-idx*306+'px';
+                 }
+                 setTimeout(function() {
+                    lock=true;
+                },500)
+             }
+    
+    </script>
+</body>
+</html>
