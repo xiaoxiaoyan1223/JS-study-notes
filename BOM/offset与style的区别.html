@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        var box=document.querySelector('.box');
+        console.log(box.offsetWidth);
+        //offset可以得到任意样式表中的样式值
+        //获得的样式值没有单位
+        //width包含padding+border+width   只能获取不能赋值
+        console.log(box.style.width);
+        //style只能得到行内样式表中的样式值  style.width是可读写属性  可获取也可赋值
+        //获取的元素不包含padding和border
+    </script>
+</body>
+</html>

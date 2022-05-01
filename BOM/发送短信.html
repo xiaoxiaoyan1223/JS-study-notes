@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    手机号<input type="number" name="" id=""> <button>发送</button>
+    <div></div>
+    <script>
+        var btn=document.querySelector('button');
+        var time=60;
+        btn.addEventListener('click',function(){
+            btn.disabled=true;//按钮不能点击  byn可以改成this
+            var timer=setInterval(function(){
+                if(time==0)//如果时间为0  清除定时器，复原按钮
+                {
+                    clearInterval(timer);//清除计时器
+                  btn.innerHTML='发送' ;//这个btn 不可以改成this 这个在定时器函数内  this指向windo
+                  btn.disabled=false;
+                  time=60;//
+                }
+                else{
+                    btn.innerHTML='还剩'+time+'秒';
+                    time--;
+                }
+                
+            },1000);
+        })
+
+        console.log(location.search);
+        //先去掉问号 substr('起始的位置'，截取几个字符)
+         var params=location.search.substr(1);
+         //利用=把字符串分割为数组 split=('=')
+         var arr=params.split('=');
+         var div=document.querySelector('div');
+         div.innerHTML=arr[1]+'欢迎您';
+    </script>
+</body>
+</html>

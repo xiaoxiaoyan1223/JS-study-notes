@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            color: aliceblue;
+            margin: 5px;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hour"></div>
+    <div class="minute"></div>
+    <div class="second"></div>
+    <!-- <button>点击停止定时器</button> -->
+<script>
+    //1、setTimeout()只调用一次
+    //我们经常给定时器添加标识符  var timer1=***
+    //第一种  
+    // setTimeout(function(){
+    //     console.log('时间到');
+    // },2000);
+    //直接写函数
+    // function callback(){
+    //     console.log('过去三秒了');
+    // }
+    // var timer1=setTimeout(callback,3000)
+    //停止定时器
+    //  var btn=document.querySelector('button');
+    //  btn.addEventListener('click',function(){
+    //     clearTimeout(timer1);
+    //  })
+
+     //setInterval回调函数   每隔相同的时间都会调用这个函数
+     //window.setInterval(调用函数，延时时间)；
+    //  setInterval(function(){
+    //      console.log('我要一直输出');
+    //  },2000)
+
+    //京东倒计时效果
+    var hour=document.querySelector('.hour');
+    var minute=document.querySelector('.minute');
+    var second=document.querySelector('.second');
+    var inputTime=+new Date('2022-4-8 20:00:00');
+    countDown();
+    setInterval(countDown,1000)
+    function countDown() {
+            var nowTime= +new Date();
+            // var inputTime=+new Date(time);
+            var times=(inputTime-nowTime)/1000;
+            var h=parseInt(times/60/60%24);
+            h=h<10?'0'+h:h;
+            hour.innerHTML=h;
+            var m=parseInt(times/60%60);
+            m=m<10?'0'+m:m;
+            minute.innerHTML=m;
+            var s=parseInt(times%60);
+            s=s<10?'0'+s:s;
+            second.innerHTML=s;
+    }
+</script>
+</body>
+</html>
