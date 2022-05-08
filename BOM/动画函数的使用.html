@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .sliderbar {
+            /* width: 200px; */
+            position: relative;
+            /* right: 0; */
+            height: 40px;
+        }
+        span {
+            position: absolute;
+            height: 40px;
+            right: 0px;
+            top: 20px;
+            width: 40px;
+            background-color: pink;
+            z-index: 999;
+            text-align: center;
+            line-height: 40px;
+        }
+        .con {
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 5px;
+            position: absolute;
+            right: -160px;
+            top: 20px;
+            background-color: pink;
+            /* text-align: center; */
+        }
+    </style>
+    <script src="animate.js"></script>
+</head>
+<body>
+    <div class="sliderbar">
+        <span>←</span>
+        <div class="con">问题反馈</div>
+    </div>
+    <script>
+        // 1、获取元素
+        var sliderbar=document.querySelector('.sliderbar');
+        var con=document.querySelector('.con');
+        var span=document.querySelector('span');
+        //当我们鼠标经过sliderbar就让con这个盒子滑动到左侧
+        //当我们鼠标离开sliderbar就让con这个盒子滑动到右侧
+        sliderbar.addEventListener('mouseenter',function(){
+            animate(con,-160,function(){
+                //当我们动画执行完毕，左箭头更换为右箭头
+                span.innerHTML='→';
+            });
+        })
+        sliderbar.addEventListener('mouseleave',function(){
+            animate(con,0);
+            span.innerHTML='←';
+        })
+    </script>
+</body>
+</html>
