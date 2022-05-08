@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            float: left;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <script>
+        var box1=document.querySelector('.box1');
+        var box2=document.querySelector('.box2');
+        var box3=document.querySelector('.box3');
+        // 点击哪个盒子哪个盒子就变红
+        // function setColorToRed(){
+        //     this.style.backgroundColor='red';
+        // }
+        // box1.onclick=setColorToRed;
+        // box2.onclick=setColorToRed;
+        // box3.onclick=setColorToRed;
+        //点击哪个盒子两秒后变红 
+        function setColorToRed(){
+            var self=this;
+            setTimeout(function(){
+                //this.style.backgroundColor='red';//里面再嵌套个函数，根据规则5这个this指代的对象就会变成window
+                // 所以为了不让this指代对象改变，通常需要在嵌套函数外对this备份
+                self.style.backgroundColor='red';
+            },2000)
+        }
+    </script>
+</body>
+</html>

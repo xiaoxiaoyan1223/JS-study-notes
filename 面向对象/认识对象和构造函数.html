@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        var 对象名={
+            属性名1：属性值，
+            属性名2：属性值
+            如果属性名中有短横杠的话，属性名必须加引号
+        }
+        点语法访问属性值：对象名.属性名
+        如果属性名用变量储存的话，访问的时候，应该是 对象名[属性名]  用点语法访问会出现undefined
+
+        属性的更改：直接赋值更改即可
+
+        属性的添加：直接  对象名.属性名=属性名1：属性值
+        属性的删除：用delete操作符  delete obj.属性名
+    </p>
+    <script>
+    //构造函数
+    function People(name,age,sex){
+        this.name=name,
+        this.age=age,
+        this.sex=sex
+    }
+    // 一个函数是否是构造函数 主要是看是否是new调用的
+    var xiaohong=new People('xiaohong',12,'女');
+    var xiaoming=new People('xiaoming',2,'男');
+    var xiaogang=new People('xiaogang',8,'男');
+
+    </script>
+</body>
+</html>

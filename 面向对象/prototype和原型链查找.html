@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 构造函数的prototype是实例的原型 -->
+    <!-- 原型链查找:实例可以通过打点调用的方法访问他的原型的属性和方法 -->
+    <script>
+        function People(name,age,sex){
+        this.name=name,
+        this.age=age,
+        this.sex=sex
+    }
+    People.prototype.nationality='中国';
+    var xiaohong=new People('xiaohong',12,'女');
+    var xiaoming=new People('xiaoming',2,'男');  
+    //xiaohong 和 xiaoming 不是同一个函数 会浪费内存空间 
+    console.log(xiaohong);
+    // 在prototype上添加方法   利用原型添加的方法可以被共同使用，节省内存空间
+    people.prototype.sayhello=function()
+    {
+        console.log('我是'+this.name)
+    }
+    </script>
+</body>
+</html>

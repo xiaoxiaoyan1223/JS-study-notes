@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>  new 函数() 用new操作符调用函数四步走
+        （1）函数体内会创建一个空白的对象
+        （2）函数的上下文this会指向这个对象
+        （3）函数体内的语句会执行
+        （4）函数会自动返回上下文对象，即使函数没有return语句
+    </p>
+    <script>
+        function fun() {
+            //在这之前函数内会自动创建出一个空对象{}
+            this.a=3;
+            this.b=4;
+            //函数会自动返回{a:3,b:5}
+        }
+        var obj=new fun()//返回的对象会被obj接收
+        
+    </script>
+</body>
+</html>

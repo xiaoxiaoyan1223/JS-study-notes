@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        var obj1={
+            a:1,
+            b:2，
+            c:[4,5,6]
+        }
+        obj2=obj1;  这样只能实现让内存指向同一个地方  而不能实现对象的克隆
+
+        对象的浅克隆方法   利用循环遍历每个属性同时进行赋值
+        for(var k in obj1)
+        {
+            obj2[k]=obj1[k];
+        }
+        //这也只能实现浅克隆  若是obj1中有数组或者对象，往数组或对象中添加，修改值时，浅克隆的到的对象的属性值也会改变
+
+    </p>
+    <script>
+        var obj1={
+            a:1,
+            b:2,
+            c:[33,44,{
+                m:7,
+                n:8
+            }]
+        }
+        // 深克隆函数
+        function deepClone(o){
+            //数组
+            if(Array.isArray(o)){
+                var result=[];
+                for(var i=0;i<o.length;i++)
+                {
+                    result.push(deepClone(o[i]));
+                }
+            } 
+            //对象
+            else if(typeof o=='object'){
+                var result={};
+                for(var k in o){
+                    result[k]=deepClone(o[k])
+                }
+            }
+            else {
+                //基本类型
+                var result=o;
+            }
+            return result;
+        }
+        var obj2=deepClone(obj1);
+        console.log(obj2);
+    </script>
+</body>
+</html>
