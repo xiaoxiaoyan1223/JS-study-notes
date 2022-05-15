@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box img{
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <!-- <p>面向对象的本质：定义不同的类，让类的实例工作，经常用到封装和需要复用性的场合</p> -->
+    <script>
+        //定义红绿灯类，一开始都是红色  红色1 黄色2 绿色3
+        function TrafficLight(){
+            this.color=1;
+            //调用自己的初始化方法
+            this.init();
+            this.bindEvent();
+        }
+        //初始化方法
+        TrafficLight.prototype.init=function() {
+            this.dom=document.createElement('img');
+            this.dom.src='../images/'+this.color+'.jpg';
+            box.appendChild(this.dom);
+        
+        }
+        //绑定监听
+        TrafficLight.prototype.bindEvent=function(){
+            //备份上下文
+            var self=this;
+            this.dom.onclick=function(){
+                self.changeColor();
+            }
+        }
+        TrafficLight.prototype.bindEvent=function()
+        {
+            //改变自己color的颜色，自己管自己
+            this.color++;
+            if(this.color==4)
+            {
+                this.color=1;
+            }
+        }
+        
+        
+        
+        //绑定监听
+        TrafficLight.prototype.bindEvent=function(){
+            var self=this;
+            this.dom.onclick=function(){
+                console.log(3);
+                self.changeColor()
+            }
+        }
+        TrafficLight.prototype.changeColor=function(){
+            this.color++;
+            if(this.color==4){
+                this.color=1;
+                
+            }
+            this.dom.src='../images/'+this.color+'.jpg';
+        }
+        var box=document.querySelector('.box')
+        var count=100;
+        while(count--)
+        {
+            new TrafficLight();
+        }
+        
+
+    </script>
+</body>
+</html>
