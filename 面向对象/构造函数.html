@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function 函数名（第一个字母要大写）(name,age){
+        //     this.name=name;
+            // this.age=age;
+            // this.sing=function（参数）{
+
+        //   }//构造函数内部也可以包含函数
+        // }
+        //var a=new 函数名（实参）;可以调用函数   a是一个对象  e而构造函数是泛指是创造对象的过程
+        //console.log(a.name);
+        //console.log(a.['age']);
+        //console.log(a.sing(实参))
+        function Star(name,age,sex) {
+            this.name=name;
+            this.age=age;
+            this.sex=sex;
+        }
+        var ldh=new Star('刘德华',18,'男');
+        console.log(ldh);
+        for(var i in ldh){
+            console.log(ldh[i]);
+        }
+
+    </script>
+</body>
+</html>

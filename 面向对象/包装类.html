@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>而string, number, boolean都可以有两种，一个是正常的三者，一个是三者对象(用new创建);
+        即js为我们提供了三个包装类：
+        String()：将原始数据类型字符串，转换为String对象。
+        Number()：将原始数据类型的数字，转换为Number对象。
+        Boolean()：将原始数据类型的布尔值，转换为Boolean对象。
+        原始值是坚决不可能有属性和方法的，但是为什么能调用呢，是因为它经历了一个过程叫包装类
+    <script>
+        var a=new Number(123);
+        var b=new String('慕课网');
+        var c=new Boolean(true);
+        console.log(typeof a);//object
+        console.log(a);//Number{123}
+        //虽然包装出来的类型是对象，但还可以像普通的基本类型一样使用
+        // 包装类的目的就是为了让基本类型值可以从他们的构造函数的promotype上获得方法
+    </script>
+</body>
+</html>
