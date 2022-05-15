@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- 定义正则表达式 -->
+    <p>/^$/  两个正斜线，^开头$结尾</p>
+    <p>正则表达式“按位描述规则，是指它是一位一位地描述字符串的构成形式
+        \d表示数字\d{3}表示三个数字
+    </p>
+    <script>
+        // 定义六位数字的字符串  用正则表达式检查
+        var regexp=/^\d{6}$/;
+        var str1='123456';
+        var str2='123ert';
+        var str3='12345678h';
+        //打点调用test测试
+        console.log(regexp.test(str1));//true
+        console.log(regexp.test(str2));//false
+        console.log(regexp.test(str3));//false
+
+        //创建正则表达式的方法
+        var regexp1=/^\d{6}&/;
+        var regexp2=new RegExp('^\\d{6}&');//因为在单引号里面反斜杠有转义的意思，所以要用两个反斜杠
+        
+    </script>
+</body>
+</html>

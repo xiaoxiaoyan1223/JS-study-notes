@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nameWarning {
+            color: red;
+            display: none;
+        }
+        .telWarning {
+            color: red;
+            display: none;
+        }
+        .emilWarning {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        请输入中文名字：
+        <input type="text" class="nameFiled">
+        <span class="nameWarning">输入的姓名不合法</span><br>
+        请输入电话号码：
+        <input type="text" class="telFiled">
+        <span class="telWarning">输入的电话不合法</span><br>
+        请输入E-mile：
+        <input type="text" class="emilFiled">
+        <span class="emilWarning">输入的邮箱地址不合法</span>
+    </p>
+
+    <script>
+        
+        var nameFiled=document.querySelector('.nameFiled');
+        var nameWarning=document.querySelector(".nameWarning");
+        var telFiled=document.querySelector('.telFiled');
+        var telWarning=document.querySelector(".telWarning");
+        var emilFiled=document.querySelector('.emilFiled');
+        var emilWarning=document.querySelector(".emilWarning");
+        var regexp=/^[\u4E00-\u9FA5]{2,4}$/;
+        nameFiled.onblur=function(){
+            // nW.style.display='inline';
+            // console.log(3);
+            var name=nameFiled.value;
+            if(regexp.test(name))
+            {
+                nameWarning.style.display='none';
+            }
+            else {
+                nameWarning.style.display='inline';
+            }
+        }
+        
+        telFiled.onblur=function(){
+            // nW.style.display='inline';
+            // console.log(3);
+            var tel=telFiled.value;
+            if(/^1\d{10}$/.test(tel))
+            {
+                telWarning.style.display='none';
+            }
+            else {
+                telWarning.style.display='inline';
+            }
+        }
+        emilFiled.onblur=function(){
+            // nW.style.display='inline';
+            // console.log(3);
+            var emil=emilFiled.value;
+            if(/^\w{2,}\@\w{2,}\.[a-z]{2,4}(\.[a-z]{2,4})?$/.test(emil))
+            {
+                emilWarning.style.display='none';
+            }
+            else {
+                emilWarning.style.display='inline';
+            }
+        }
+
+    </script>
+</body>
+</html>

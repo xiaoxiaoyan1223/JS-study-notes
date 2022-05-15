@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 例题 -->
+    <p>
+    1、常见类型
+     \d就是[0-9]。表示是一位数字。记忆方式：其英文是digit（数字）。
+
+     \D就是[^0-9]。表示除数字外的任意字符。
+
+     \w就是[0-9a-zA-Z_]。表示数字、大小写字母和下划线。记忆方式：w是word的简写，也称单词字符。
+
+     \W是[^0-9a-zA-Z_]。非单词字符。
+
+     \s是[ \t\v\n\r\f]。表示空白符，包括空格、水平制表符、垂直制表符、换行符、回车符、换页符。记忆方式：s是space character的首字母。
+
+     \S是[^ \t\v\n\r\f]。 非空白符。
+
+      .就是[^\n\r\u2028\u2029]。通配符，表示几乎任意字符。换行符、回车符、行分隔符和段分隔符除外。记忆方式：想想省略号...中的每个点，都可以理解成占位符，表示任何类似的东西。
+    </p>
+    <p>
+        2、字符的转义
+        /^.$/表示检查是不是任意字符
+        /^\.$/表示检查是不是小数点    
+        不管这个符号有没有特殊意义，都可以在这个符号前面加上一个反斜杠，以确保表达的是想表达的意义
+    </p>
+    <p>
+       3、 方括号表示方法
+        使用方括号，比如[xyz],可以创建一个字符集合，表示匹配方括号中的任意字符  比如/^[xy]\d{7}$/ 表示第一位字符是x或y 后面是七个数字
+        可以使用短横来指定一个字符范围 ^表示否定在方括号内部   比如\d也可表示为[0-9] \w 可以表示为[a-zA-Z0-9]
+    </p>
+    <p>
+        4、量词
+        {m,} 表示至少出现m次。
+        
+        {m} 等价于{m,m},表示出现m次
+        
+        ? 等价于{0,1}，表示出现或者不出现。记忆方式：问号的意思表示，有吗？
+
+        + 等价于{1,}，表示出现至少一次。记忆方式：加号是追加的意思，得先有一个，然后才考虑追加。
+
+        * 等价于{0,}，表示出现任意次，有可能不出现
+    </p>
+    <p>
+        5、正则表达式的相关方法
+        test()
+        exec()方法：在一个指定字符串中执行一个搜索匹配查找，返回一个结果数组或者null
+        search()方法：字符串打点调用search(正则表达式)  返回的是查询到的下标位置  indexOf()不可以使用正则表达式
+        match()方法：字符串打点调用match(正则表达式)  以数组的形式返回查找到所需的内容
+        replace()方法：str.replace(正则表达式，替换成的内容)
+        split()方法：将字符串按照正则表达式规则拆分为多个部分
+    </p>
+    <p>
+        4. 多选分支
+    一个模式可以实现横向和纵向模糊匹配。而多选分支可以支持多个子模式任选其一。
+    具体形式如下：(p1|p2|p3)，其中p1、p2和p3是子模式，用|（管道符）分隔，表示其中任何之一。
+    例如要匹配"good"和"nice"可以使用/good|nice/
+    </p>
+    <script>
+        // 某公司的秘钥形式是：□□□-□□□□-□□□，其中小方格表示字母或者下划线，使用正则表达式检验某字符串是否符合此规则
+       //正则表达式  \w代表字母或者下划线
+        var regexp=/^\w\w\w-\w\w\w\w-\w\w\w$/
+        // 需要检验的秘钥
+        var str1='wei-jiop-jji';
+        console.log(regexp.test(str1));
+
+        // 题目一：验证某字符串是否由五位字母组成，大小写均可
+        var str1='abcDe';
+        var str2='abc..';
+        var str3='abcd';
+        var str4='abcm';
+        var str5='www.abc.com';
+        var str6='www.abc.com.cn';
+        var str7='abc12344b';
+        
+        console.log(/^[a-zA-Z]{5}$/.test(str1)); //true
+        console.log(/^[a-zA-Z]{5}$/.test(str2)); //true
+
+        //题目二：验证一个字符串是否仅有五位，且仅由小写字母、点构成
+        console.log(/^[a-z\.]{5}$/.test(str2));//true
+
+        //题目三：验证某字符串是否为四位小写字母，且最后一位不能是m字母
+        console.log(/^[a-z]{3}[a-ln-z]$/.test(str3));//true
+        console.log(/^[a-z]{3}[a-ln-z]$/.test(str4));//false
+
+        //题目四：验证某字符串是否符合网址：以www.开头，中间是任意位的字符（字母、数字、下划线至少一位，最后以.com结尾，也可以.com.cn 
+        //
+        var regexp1=/^www\.\w+\.com(\.cn)?$/
+        console.log(regexp1.test(str5));
+        console.log(regexp1.test(str6));
+        var regexp2=/\d+/g;//贪婪的，尽可能多的去匹配，最后的g是修饰  表示全局查找
+        console.log(regexp2.exec(str7));
+        var result=str7.replace(/[a-z]+/g,'*');  //这里的加号，表示贪婪的意思，尽可能多的连续匹配  要是不加，则结果为***12344*
+        console.log(result);
+
+    </script>
+    
+</body>
+</html>
