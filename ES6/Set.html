@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        // 1、Set是无序的、不能有重复的集合  跟数组不同
+        // 2、Set的方法和属性
+        // add方法
+        const s=new Set();
+        s.add(1).add(2);//每次调用add方法只能添加一个元素
+        // delete方法  使用delete删除不存在的元素时也不会报错  一次只能删除一个元素
+        s.delete(1);
+        // clear方法  一次全部删除
+        s.clear();
+        //forEach方法 遍历集合中的元素
+        s.forEach(function(value,key,set)
+        {
+            // Set中value与key相等
+            //s===set  true  
+            console.log(set);
+        });//按照成员添加进集合的顺序遍历
+        //size属性
+        // 3、Set()构造函数的参数
+        // ·数组
+        const s1=new Set([1,2,1]);
+        console.log(s1);//{1,2}
+        // ·字符串、arguments、NodeList、Set等
+        console.log(new Set('hi'));//{"h","i"}
+        function func(){
+            console.log(new Set(arguments));
+        };
+        func(1,2,1)//{1,2}
+        console.log(new Set(document.querySelectorAll('p')));//{p,p,p}
+        console.log(new Set(s));
+        // 4、什么时候使用set
+        // ·数组或字符串去重
+        console.log([...new Set(1,2,1)]);
+        const s2=new Set("ababaakjhjh");
+        console.log([...s2].join(''));//abkjh
+
+        // ·不需要通过下标访问，只需要遍历时
+        // ·需要使用到set的方法属性时
+        // ·存放DOM元素
+        const ss=new Set(document.querySelectorAll('p'));
+        ss.forEach(function(elem){
+            elem.style.color="red";
+            elem.style.backgroundColor="yellow";
+        })
+
+    </script>
+    
+</body>
+</html>

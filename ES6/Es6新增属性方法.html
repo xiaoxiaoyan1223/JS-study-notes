@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 1、includes 
+      //·判断字符串中是否含有某些字符
+      console.log('abc'.includes('ab'));//true 
+      console.log('abc'.includes('ac'));//false 
+      //·查询字符串，第二个参数表示位置，默认值是0
+      console.log('abc'.includes('a',0));//ture
+      //·应用
+      let url='http://www.imooc.com/course/list'
+      const addURLPara=(url,name,value)=>{
+        url+=url.includes('?')?'&':'?';
+        url+=`${name}=${value}`;
+        return url;
+      }
+      //·判断数组中是否含有某个成员
+      console.log([1,2,3].includes('2'));//false
+      console.log([1,2,3].includes(2));//true
+        // 基本遵循严格相等(===),但是对于NaN的判断与===不同 includes基本认为NaN===NaN
+     //·应用  数组去重
+     const arr=[];
+     for(const item of [1,2,1])
+     {
+         if(!arr.includes(item))
+         {
+             arr.push(item);
+         }
+     }//[1,2]
+      
+    // 2、padStrat()和padEnd()
+        // ·补全字符串的长度  
+        // 注意事项是(1)如果长度小于原字符串长度，则会返回原字符串(2)如果没有设置填充的字符，则默认是空格填充
+        // 应用主要都在日期上
+        console.log('x'.padStart(5,'ab'));//ababx  从开头补，5是长度
+        console.log('x',padEnd(5,'ab'));//xabab  从结尾开始补，5是长度
+        console.log('x'.padEnd(4,'ab'));//xaba  长度不够的话直接切断
+
+    // 3、trimStart()和trimEnd()
+        // ·清除字符串首或者尾的空格，中间的不能清除
+        const s=' a b c ';
+        console.log(s.trimStrat());//a b c 
+        console.log(s.trimLeft());
+        console.log(s.trimEnd());// a b c
+        console.log(s.trimRight());
+        console.log(s.trim());//一次性去掉所有空格
+        // ·应用 提交表单时 可以用trim来清空空格，防止输入内容为空格也能提交上
+
+    </script>
+</body>
+</html>

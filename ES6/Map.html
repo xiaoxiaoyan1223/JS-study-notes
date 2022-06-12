@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1、map和对象都是键值对的集合  map的形式是键=>值
+        const m=new Map();
+        m.set("name","Anna");//{"name"=>"Anna"}
+        // 2、map和对象的区别
+        // 对象一般用字符串做键
+        // Map的键可以是 基本数据类型：数字、字符串、布尔值、undefind、null
+                    //  引用数据类型：对象、[]、函数、Set、Map
+        // 3、map的方法属性
+        // ·set 使用set添加新的成员，后添加的成员会覆盖新添加的成员
+        const m2=new Map();
+        m2.set('age',16).set('sex','female').set('age',18);
+        // ·add
+        // ·get  通过键获取值  如果没有键是undefined
+        console.log(m2.get("age"));//18 
+        // ·has  判断是否有某个键
+        // ·delete
+        // ·clear
+        // ·forEach
+        
+
+    </script>
+</body>
+</html>

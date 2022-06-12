@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        用反引号(`)标识，它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。
+        用法
+        // 普通字符串
+        `In JavaScript '\n' is a line-feed.`
+ 
+        // 多行字符串
+        `In JavaScript this is
+        not legal.`
+ 
+        // 字符串中嵌入变量
+        var name = "Bob", time = "today";
+        `Hello ${name}, how are you ${time}?`   // Hello Bob, how are you today?
+        上面代码中，模板字符串都是用反引号表示，如果在模板字符串中需要使用反引号，则前面需要用反斜杠转义
+        特别注意：如果使用模板字符串表示多行字符串，则所有的空格、缩进和换行都会被保留在输出中。
+    </p>
+    <p>
+    模板字符串中还可以调用函数
+    function func() {
+        return 'Hello';
+    }
+     
+    `${func()} World`;
+    // "Hello World"
+
+    如果大括号中的值不是字符串，则将按照一般的规则转换为字符串。如，若大括号中是一个对象，则将默认调用对象的toString方法，把对象转换为字符串。
+    如果模板字符串中的变量没有声明，则会报错。
+    同时模板字符串之间可以嵌套
+    </p>
+</body>
+</html>

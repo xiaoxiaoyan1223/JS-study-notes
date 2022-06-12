@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1、认识剩余数组 -->
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        // 1、认识剩余数组
+        const add=(x,y,z,...args)=>{
+            console.log(x,y,z,args);
+        }
+        add(1,2,3,4,5)//1,2,3,[4,5] 即多余的参数以数组的形式存起来  剩余参数永远是个数组，即使没有也是个空数组
+        // 剩余参数只能放在最后一个位置
+        // 2、剩余数组的应用
+        const add1=(...args)=>{
+            let sum=0;
+            for(let i=0;i<args.length;i++)
+            {
+                sum+=args[i];
+            }
+            return sum;
+        }
+        // 3、数组展开符的基本用法
+        console.log(Math.min(...[1,2,3]));
+        // 相当于Math.min(1,2,3)
+        // 4、区分剩余参数和展开运算符
+        // 展开运算符：[1,2,3]变成1,2,3   而剩余参数正好相反:1,2,3->[1,2,3]
+        // 4、展开运算符的应用
+        // 复制数组
+        const a=[1,2];
+        const c=[...a]//这样就完成了数组的复制，并且改变数组a的值，不会影响数组c
+        // 合并数组
+        const b=[2,3];
+        const d=[6,7];
+        const bd=[...b,...c];//bd即为合并后的数组
+        // 字符串转换为数组
+        console.log(..."alex");//a l e x
+        console.log([...alex]);//["a","l","e","x"]
+        //类数组转化为数组
+        //arguments
+        const fun=function()
+        {
+            console.log([...arguments]);
+        }
+        fun(1,2);
+        //NodeList
+        console.log([...document.querySelectorAll("p")]);
+        // 5、展开对象
+        // 对象不能直接展开，应该在{}中展开
+        const obj={
+            colore:'red',
+            shape:'round'
+        };
+        console.log({...obj});//展开得到的对象跟原来对象不一样，原来对象改变不会影响这个对象
+        // 6、对象的合并  跟数组合并一样，不过要在{}中进行，同时如果两个对象中属性有相同的，后面会覆盖前的
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // lterator遍历器
+        // 遍历数组用for循环或者forEach
+        // 遍历对象用for in 循环
+        // lterator就是为了统一遍历方式
+        // [][Symbol.iterator]()//lterator{}得到一个对象
+     // 1、for of 的原理
+        // const arr=[1,2,3];
+        // const it=arr[Symbol.iterator]();//it在此处是一个对象  可迭代对象
+        // let next=it.next();
+        // while(!it.done)
+        // {
+        //     console.log(next.value);
+        //     next=it.next();
+
+        // }
+    const arr=[1,2,3];
+    for(const item of arr){
+        console.log(item);
+    }
+    // 2、与break continue一起使用
+    // 3、通过key()获得索引值 arr.keys()   arr.values()得到的是值
+    for(const key of arr.keys())
+    {
+        console.log(key);//0,1,2
+    }
+    //4、 entries()得到的是索引+值组成的数组的可遍历对象
+    for(const entrie of arr.entries())
+    {
+        console.log(entrie);//[0,1],[1,2],[2,3]
+    }
+    //5、原生可遍历的 数组、字符串、Set、Map、Arguments对象、NodeList对象
+        // ·都可以使用结构赋值
+        // ·展开运算符
+        // ·for of
+        // ·Set Map构造函数
+
+
+    </script>
+</body>
+</html>
