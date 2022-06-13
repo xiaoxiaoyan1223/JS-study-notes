@@ -52,6 +52,48 @@
         console.log(s.trimRight());
         console.log(s.trim());//一次性去掉所有空格
         // ·应用 提交表单时 可以用trim来清空空格，防止输入内容为空格也能提交上
+    // 4、arry.from()方法  将其他类型的数据转化为数组  
+            //·可以遍历的对象都可以通过这种方式，但还是更推荐使用展开运算符
+            //·拥有length属性的任意对象都可以使用这种方法
+            //·第二个参数 作用类似于数组的map方法，用来对每个元素进行处理，将处理后的值放回到数组中去
+            console.log(Arry.from('12',value=>value*2));//[2,4]
+            //·第三个参数修改this指向
+            Arry.from('12',
+            function(){//如果这里使用的是箭头函数则不可以修改
+                console.log(this);
+            },document)//本来this指向window，修改之后指向document
+
+    //5、find():找到满足的条件立即返回
+    //   findindex():找到满足的条件立即返回其索引
+    [1,5,7,3,9].find((value,index,arr)=>{
+        return value>5;
+    });//7
+    [1,5,7,3,9].findindex((value,index,arr)=>{
+        return value>5;
+    });//2
+      //第二个参数是修改this指向，同上
+    //6、Object.assign 合并多个对象 
+    const apple={
+        color:'red',
+        shape:'round',
+        taste:'sweet'
+    }
+    const pen={
+        color:'yellow',
+        use:'write'       
+    }
+    Object.assign(apple,pen);//返回的是第一个对象，第二的对象里面的属性会添加或者覆盖到第一个对象里面 
+    console.log({...apple,...pen});//展开运算符也可以合并，但是合并后返回的是一个新对象
+        // 基本数据类型作为源对象时，会先转化为对象再合并
+        Object.assign({},undefined);//{}
+        Object.assign({},null);//{}
+        Object.assign({},1);//{}
+        //应用  合并默认参数和用户参数
+    //7、Object.keys,Object.values,Object.entries
+        // 与数组的方法基本相同 只不过数组是实例调用，而对象是构造调用
+        [1,2].values();
+        Object.values(apple);
+
 
     </script>
 </body>
