@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <img src="../images/小凯.jpg" alt="",id="img">
+    <div class="box"></div>
+    <script>
+        // 1、Promise主要就是为了解决回调函数的层层嵌套问题（回调地狱）
+        // 2、Promise的基本使用方法
+           //·实例化构造函数生成实例对象
+           const p=new Promise(()=>{});
+           //·Promise的状态
+           //Promise有三种状态：一开始是pending（未完成），执行resolve，变成fullfilled（resolved），已成功
+           //执行resolve  pending->resolved
+           //执行reject  pending->rejected
+           const p1=new Promise((resolve,reject)=>{
+            resolve({username:alex})//括号里面是可以跟东西的比如字符串、数字、对象、数组 在then方法中接收
+            //这里要特别注意Promise的状态一旦改变就不会再变了  比如调用了resolve  在调用reject，它的状态会是fulfilled
+            // reject()
+           });
+        // 3、then方法  then方法执行后返回一个新的Promise对象
+          p1.then(
+            //状态是成功的话，会执行下面这第一个回调函数
+            date=>{
+                console.log('success',date);//success  {username:alex}
+            },
+            //状态是rejected的话，会执行这第二个回调函数
+            ()=>{
+                console.log('failed');
+            }
+          )
+            //·then方法返回的Promise的状态的改变
+            const p2=new Promise((resolve,reject)=>{
+                resolve()
+            });
+            p2.then(
+                ()=>{
+                    console.log('success1');
+                },
+                ()=>{
+                    console.log('failed2');
+                    //在then的回调函数中，return后面的东西，会用Promise包装一下
+                    //return undefined;return后面是要返回的东西相当于
+                    return new Promise((resolve,reject)=>{
+                    resolve(unfined)}//默认情况下回执行resolved
+                )
+                }
+            ).then(
+                date=>{
+                    console.log('success3',date)
+                },
+                erro=>{
+                    console.log('failed3',erro);
+                }
+            ).then(
+                date=>{
+                    console.log('success4',date);
+                },
+                erro=>{
+                    console.log('failed4',erro);
+                }
+            )
+        //4、利用Promise解决回调地狱
+        const move=(el,{x=0,y=0}={},end=()=>{})=>{}
+        const boxEl=document.querySelector('.box');
+        const movePromise=(el,point)=>{
+            return new Promise((resolve)=>{
+                move(el,point,()=>{
+                    resolve()
+                });
+            })
+        }
+        document,addEventListener(
+        'click',
+        ()=>{
+            movePromise(boxEl,{x:150})
+            .then(()=>{
+                return movePromise(boxEl,{x:150,y:150})
+            })
+            .then(()=>{
+                return movePromise(boxEl,{y:150})
+            })
+            .then(()=>{
+                return movePromise(boxEl,{x:0,y:0})
+            })
+        },false)
+        //5、catch 
+        // 专门处理Promise失败的状态（rejected）状态 属于then的一种特例
+        //catch可以捕获它前面出现的错误，一般总建议Promise后面要跟catch方法，这样可以处理Promise内部发生的错误
+        new Promise((resolve,reject)=>{
+            resolve()
+        }).then(data=>{
+            console.log(data);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    // 6、finally方法
+        // 当Promise状态发生变化时执行，不变化不执行
+    //7、Promise.resolve() Promise.reject()
+       //  是成功状态Promise的简写形式
+       //new Promise(resolve=>resolve('foo'));
+       //简写 Promise.resolve('foo')
+       Promise.resolve('foo').then(data=>{
+           console.log(data);
+       })
+       //当Promise接收的是Promise对象时，直接返回个Promise对象，什么都不做
+       const p3=new Promise(resolve=>{
+           setTimeout(resolve,1000,'我执行了');
+       });
+       Promise.resolve(p3).then(data=>{
+           console.log(data);
+       });
+       //其实上面相当于p3.then()
+    //8、Promise.all()
+       //Promise.aii()关注多个Promise对象的状态变化 传入多个Promise实例 返回的也是Promise 对象
+       //Promise.all()的状态变化与所有传入的Promise实例对象状态有关
+       //所有状态都变为resolved，最终的状态才会变成resolved
+       //只要有一个状态是rejected，最终的状态都是rejected
+       const delay=ms=>{
+           return new Promise(resolve=>{
+               setTimeout(resolve,ms);
+           });
+       };
+       const t1=delay(1000).then(()=>{
+           console.log('t1完成了');
+           return 't1';
+       });
+       const t2=delay(1000).then(()=>{
+           console.log('t2我完成了');
+           return 't2';
+       });
+       const t=Promise.all([t1,12]);
+       t.then(
+        data=>{
+           console.log(data);
+       },
+       erro=>{
+           console.log(erro);
+       });//t1完成了  t2完成了 ["t1","t2"]  就是说t1 t2都完成了才调用的下面的then
+
+    //9、Promise.race()
+       //Promise.race()的状态取决于第一个完成的Promise实例对象。
+       //如果第一个完成了那么最终就完成了，如果第一个失败了，那么最终就失败了  不同于all是全部执行完才调用下面的then
+    //10、Promise.allSettled()
+       //他的状态与传入的Promise实例的状态无关，永远都是成功的，但它会记录下各个Promise的状态
+    //11、Promise的注意事项
+        //·resolve或rejecte执行之后的的代码 
+            //推荐在调用这两个函数时在前面加上return 不再执行后面的代码
+            const s=new Promise(resolve=>{
+              return resolve();
+          })
+        //·Promise.all/race/allSettled的参数问题   
+            //如果参数不是Promise数组，则会将不是Promise的数组元素转换为Promise对象
+            //任何可遍历的都可以作为参数
+        //·Promise.all/race/allSettled的出错处理  用Promise.catch()处理 可以在前面单个处理，也可以在最后统一处理
+    //12、Promise的应用异步加载图片
+       const loadImgAsync=url=>{
+           return new Promise((resolve,reject)=>{
+               //异步加载图片中一个常用的构造函数
+               const img=new Image();
+               img.onload=()=>{
+                   return resolve(img);
+               };
+               img.onerror=()=>{
+                   return reject(`Colude not load image at ${url}`);
+               };
+               img.src=url;//到这一步才会加载图片
+           });
+       };
+       const imgDOM=document.getElementById('img');
+       loadImgAsync('https://img-home.csdnimg.cn/images/20220615091913.jpg').then(img=>{
+           console.log(img.src);
+           imgDOM.src=img.src;
+       }).catch(err=>{
+           console.log(err);
+       })
+
+
+          
+    </script>
+</body>
+</html>

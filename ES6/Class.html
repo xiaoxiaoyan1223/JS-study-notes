@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1、认识Class Class 类 是一类数的统称，具体的人称之为实例或对象，类可以看做是对象的模板，用一个类可以创造出不同的对象
+        // 2、Class的基本用法 没有小括号，也不用加分号，声明类时一般首字母大写
+        class Person{
+            //实例化时执行构造方法，所以必须有构造方法，可以不写出来，但建议写出来
+            constructor(name,age){
+                this.name=name;
+                this.age=age;
+                //每个实例中这个方法并不相同，会各开辟一个空间，比较浪费
+                // this.speak=()=>{};
+                //所以我们一般使用下面这种各实例共享的方法
+                
+            }
+            speak(){
+                    console.log();
+                };//这其实是添加到了原型链上
+            //run(){}
+        }
+        Person.prototype.run=function(){}//相当于在类中添加了这个函数  但是不推荐，推荐直接把所有的方法写到类里面
+        const zs=new Person('ZS',18);
+        console.log(zs.age);//18
+        // 3、Class的两种定义形式
+            // ·声明的形式  就是上面的那种
+            // ·表达式形式
+            const person=class{
+                constructor(){
+                }
+            }//匿名的类
+            //立即执行的匿名类  注意有个new
+            (new class{
+                constructor(){
+                    console.log('ok');
+                }
+            })();
+        // 4、实例属性、静态方法和静态属性
+            // ·实例属性
+            class girl{
+                //下面两个是属性的默认值  实例化的时候如果需要修改则在constructor中改
+                name='fangfang';
+                age=18;
+                sex='female';
+                //方法就是值为函数的特殊属性
+                getSex=function(){
+                    return this.sex;
+                }
+                constructor(name,age){
+                    name=this.name;
+                    age=this.age;
+                }
+            }
+            // ·静态方法
+            // 通过static可以声明一个静态方法，这个方法可以直接通过类调用
+            class Pad{
+                //static version=1.0 //属性
+                static getVersion(){
+                    return 1.0;
+                }
+            }
+            console.log(Pad.version);//1.0
+            console.log(Pad.getVersion());//1.0
+        //5、私有属性和方法 其实是没有的但是可以模拟私有属性和方法 规定_开头表示私有
+        //防止别人无意间改了某个属性值
+          class Pen{
+            constructor(name){
+                this._name=name;//this._name=name表示私有 c.name就访问不到
+            }
+            getName(){//另一个接口
+                return this._name;
+            }
+          }
+          const c=new Pen('Alex');
+          console.log(c.name);//Alex  这样就很容易访问到
+          console.log(c.getName());
+          //将私有方法和属性移除类
+          (function(){
+              let name='';
+
+              class Apple{
+                  constructor(username){
+                    //   this.name=username;//添加到this上 就实例化了
+                      name=username;//不添加就是私有的
+                  }
+                  getName(){
+                      return name;
+                  }
+                 
+              }
+              //window.Apple=Apple;//把Apple声明到全局作用域中，在外部又可以访问到
+          })();
+          (function(){
+              const a=new Apple('apple');
+              console.log(a.name);//undefined
+              console.log(a.getName());//apple
+          })()
+
+        //6、extends
+          //·子类继承父类
+          class Per{
+            constructor(name,sex){
+                this.name=name;
+                this.sex=sex;
+                this.speak=function(){};
+            }
+            say(){}
+            static say(){}
+          };
+          Per.version=1.0;
+          class Programmer extends Per{
+            constructor(name,sex){
+                super (name,sex);//到这里就继承了父亲的所有属性方法
+                super.say()//super代表父类的原型对象Per.prototype  
+            }
+            
+          }
+          //·如何修改继承过来的东西 1同名覆盖 2改写 但特别注意 super前面不能出现this操作
+          //作为函数调用使用
+          //代表父类的构造方法只能用在子类的构造方法中，用在其他地方会报错
+          //super虽然代表了父类的构造方法，但其实内部的this指向子类
+          //作为对象使用
+          //super代表父类的原型对象Per.prototype  所以定义在父类实例上的方法或者属性，是无法通过super调用的
+
+
+
+
+
+
+    </script>
+</body>
+</html>
