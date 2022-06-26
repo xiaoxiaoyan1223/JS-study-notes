@@ -1,0 +1,17 @@
+---------------------Cookie-------------------
+#1、是浏览器存储数据的一种方式，存储在用户本地，属于本地存储
+#2、利用cookie跟踪统计用户访问该网站的习惯，比如什么时间访问了哪些页面，停留了多长时间
+#3、写入cookie
+    ·document.cookie='username=zs';
+    ·document.cookie='username=ls';
+#cookie的属性
+    ·cookie的名称和值  最重要的两个属性，创建cookie时必须填写，其他属性可以使用默认值
+      cookie的名称或者值包含非英文字母时，需要使用encodeURIComponent()编码，读取时使用
+      decodeURIComponent()解码   名称最好不要用中文
+      ·document.cookie='username=zs';
+      ·document.cookie=`username=${encodeURIComponent('张三')}`;
+    ·失效时间  对于失效的cookie，会被浏览器清除；没有设置失效时间的，这样的cookie称为会话cookie
+      想要长时间存在，可以设置Expires(值为Date类型)或者Max-Age(值为数字，单位是秒)
+         *expires  document.cookie=`username=zs;expires=${new Date('2023-12-23 00:00:00')}`;
+         
+       

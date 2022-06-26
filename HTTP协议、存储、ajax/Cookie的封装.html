@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 实现网站语言切换 -->
+    <button id="cn">中文</button>
+    <button id="en">英文</button>
+   <script type="module">
+    import {set,get} from './cookie.js';
+    set('username','alex');
+    console.log(get('username'));
+    //使用封装好的Cookie实现网站语言切换
+    const cnBtn=document.getElementById('cn');
+    const enBtn=document.getElementById('en');
+    cnBtn.addEventListener('click',()=>{
+        set('language','cn',{Maxage:30*24*3600});
+        window.local='./4.html';
+    },false);
+    enBtn.addEventListener('click',()=>{
+        set('language','en',{Maxage:30*24*3600});
+        window.local='./4.html';
+    },false);
+   </script>
+   
+</body> 
+</html>
