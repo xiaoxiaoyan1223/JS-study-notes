@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module ">
+    //     const url='https://www.baidu.com';
+    // const xhr=new XLMHttpRequest();
+    // xhr.addEventListener(
+    //     'load',
+    //     ()=>{
+    //         if(xhr.readyState!=4) retuen;
+    //     if((xhr.status>=200)&(xhr.status<300)||xhr.status===304)
+    //     {
+    //         console.log(xhr.responseText);
+    //         console.log(typeof xhr.responseText);
+    //     }
+    //     },
+    //     false
+    // )
+        
+    
+
+    // // xhr.open('GET',url,true); 
+    // //url其实也可以是本地的
+    // xhr.open('GET','./plan.json',true);
+    // xhr.send(null);
+    import {ajax,get,getJSON,post} from './index.js';
+    const url='https://www.imooc.com/api/http/search/suggest?word=js';
+    const xhr=ajax(url,{
+        method:'POST',
+        params:{username:'alex'},
+        data:{
+            age:18
+        },
+        responseType:'json',
+        success(response){
+            console.log(response);
+        },
+        httpCodeError(err){
+            console.log('http code erroe',err);
+        },
+        error(xhr){
+            console.log('error',xhr);
+        },
+        abort(xhr){
+            console.log('abort',xhr);
+        },
+        timeout(xhr){
+            console.log('timeout',xhr);
+        }
+    })
+
+    </script>
+</body>
+</html>
