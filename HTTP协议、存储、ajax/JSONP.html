@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1、JSONP的原理
+            // script跨域不会被阻止
+            // JSONP主要就是利用script标签 实现跨域文件的加载
+        //2、使用JSONP实现跨域
+            //服务器端准备好JSONP接口
+            //https://www.baidu.com
+            //手动加载JSONP接口或者动态加载JSONP接口
+            const script=document.createElement('script')
+            script.src='https://www.baidu.com';
+            document.body.appendChild(script)
+            //声明函数
+            const handleResponse=data=>{
+                console.log(data);
+            }
+    </script>
+</body>
+</html>

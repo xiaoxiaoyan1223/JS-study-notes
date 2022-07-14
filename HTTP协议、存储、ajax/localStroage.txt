@@ -1,0 +1,8 @@
+-------------------------localStorage------------------------------
+#localStorage也是本地存储数据的方式，他只是存储在本地，不会发送到服务器端
+#localStorage的基本方法
+   ·setltem() 创建  会以对象的形式罗列  属性相同后面覆盖前面
+   ·length获取长度，有多少个属性
+   ·getItem()  获取属性值
+   ·removeItem()
+   ·clear()

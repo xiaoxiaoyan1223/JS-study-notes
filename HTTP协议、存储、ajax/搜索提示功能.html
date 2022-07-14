@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索提示</title>
+</head>
+<body>
+    <input type="text" id="search">
+    <ul id="result"></ul>
+    <script type="module">
+        import {getJSON} from './index_promise.js';
+        const searchInput=document.getElementById('search');
+        const resultList=document.getElementById('result');
+        const url='https://www.imooc.com/api/http/search/suggest?word=';
+        const handleInputEvent=()=>{
+            if(searchInput.value!==''){
+                getJSON(`${url}${searchInput.value}`)
+                .then(respose=>{
+                    console.log(response);
+                    let html='';
+                    for(const item of respose.data){
+                        heml+=`<li>${item.word}</li>`
+                    }
+                    resultList.innerHTML=html;
+                    resultList.style.display='';
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+            }else{
+                resultList.innerHTML='';
+                resultList.style.display='none';
+            }
+        }
+        let timer=null;
+        searchInput.addEventListener(
+        'input',
+        ()=>{
+            // handleInputEvent();
+            if(timer){
+                clearTimeout(timer);
+            }
+            timer=setTimeout(handleInputEvent,300);
+        },false)
+    </script>
+</body>
+</html>

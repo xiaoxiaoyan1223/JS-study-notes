@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form 
+    id="login"
+    action="https://www.baidu.com"
+    method="POST"
+    enctype="application/x-www-form-urlencoded">
+    <input type="text" name="username" placeholder="用户名">
+    <input type="password" name="password" placeholder="密码">
+    <input type="submit" id="submir" value="登录">
+   </form>
+   <!-- 使用Ajax提交表单 -->
+   <script>
+        const login=document.getElementById('login');
+        const {username,password}=login;
+        const btn=document.getElementById('submit');
+        const url='https://www.baidu.com';
+        btn.addEventListener(
+            'click',
+            e=>{
+                //阻止表单自动提交
+                e.preventDefault();
+                //表单数据验证
+
+                //发送Ajax请求
+                const xhr=XMLHttpRequest();
+                xhr.addEventListener(
+                    'load',
+                    ()=>{
+                        if(xhr.readyState!=4) retuen;
+                        if((xhr.status>=200)&(xhr.status<300)||xhr.status===304)
+                        {
+                            console.log(xhr.responseText);
+                            console.log(typeof xhr.responseText);
+                        }
+                        
+                    },
+                    false
+                );
+                xhr.open('POST',url,true);
+                //组装数据
+                const data=`username=${username.value}$password=${password.value}`;
+                xhr.setResquestHeader(
+                    'Content-Type',
+                    'application/x-www-form-urlencoded'
+
+                );
+                xhr.send(data);
+            }
+        )
+
+   </script>
+</body>
+</html>
