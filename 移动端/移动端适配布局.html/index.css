@@ -1,0 +1,72 @@
+*{
+    box-sizing: boder-box;
+    padding: 0;
+    margin: 0;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+
+}
+.header-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 2.5rem;
+    background-color: red;
+    z-index: 1000;
+    width: 100%;
+    height: 2.5rem;
+}
+.main-container {
+    padding: 2.5rem 0;
+    background-color: aqua;
+}
+.navbar-left,
+.navbar-center,
+.nav-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar-left,
+.navbar-right {
+    width: 2.2rem;
+}
+.navbar-center {
+    flex: 1;
+}
+.navbar-left .iconfont,
+.navbar-right .iconfont {
+    color:#fff;
+    font-size: 1.2rem;
+
+}
+.searchBox {
+    display: flex;
+    width: 100%;
+    height: 1.6rem;
+    border-radius: 0.8rem;
+    background-color: #fff;
+}
+.searchBox-left,
+.searchBox-input,
+.searchBox-right {
+    height: 100%;
+}
+.slide-container {
+    height: 9.15rem;
+    background-color: blue;
+}
+.nav-container {
+    height: 8.475rem;
+    background: rgb(232, 137, 137);
+}
+.recommend-container {
+    height: 50rem;
+    background-color: darkorchid;
+}
+.tabber-container {
+    height: 2.5rem;
+    background-color: gold;
+}

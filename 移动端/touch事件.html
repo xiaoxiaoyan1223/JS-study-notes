@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: rgb(194, 45, 45);
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box"></div>
+    <script>
+        var boxEl=document.querySelector('.box')
+        // boxEl.ontouchstart=handleStart;
+        // boxEl.ontouchmove=handleMove;
+        // boxEl.ontouchcancel=handleCancel;
+        boxEl.addEventListener('touchstart',handleStart,false)
+        boxEl.addEventListener('touchmove',handleMove,false)
+        boxEl.addEventListener('touchend',handleEnd,false)
+        function handleStart(ev){
+            console.log('touchstart',ev);
+            console.log(ev.touches,ev.targetTou);
+            var touch=ev.changedTouches[0]
+            console.log(touch);
+        }
+        function handleMove(ev){
+            console.log('touchmove');
+        }
+        function handleEnd(ev){
+            console.log('touchend');
+        }
+    </script>
+    
+</body>
+</html>

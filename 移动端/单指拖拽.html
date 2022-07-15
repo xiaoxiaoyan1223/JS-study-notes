@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单指拖拽</title>
+    <style>
+        body {
+            height: 2000px;
+        }
+        .backtop {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            background-color: rgb(0,0,0,.6);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 30px;
+            -webkit-tap-highlight-color:transparent;
+            /* transform:translate3d(x,y,0);会开启GPU加速 */
+            transform:translate3d(x,y,0);
+        }
+    </style>
+</head>
+<body>
+    <a href="#" id="backtop" class="backtop">&uarr;</a>
+    <script>
+        var backtop=document.querySelector('.backtop');
+        // 移动
+        // backtop.addEventListener('click',function(){
+        //     move(this,-10,-10)
+        // },false)
+        // function move(el,x,y){
+        //     x=x||0;
+        //     y=y||0;
+        //     el.style.transform='translate3d('+x+'px,'+y+'px,0'+')'
+        // }
+        //拖拽
+        function drag(el,options){
+            options.x=typeof options.x!=='undefined'?options.x:true;
+            options.y=typeof options.y!=='undefined'?options.y:false;
+            if(!options.x&&!options.y) return;
+            var curPoint={
+                x:0,y:0
+            }
+            //记录手指触碰点的坐标
+            var startPoint={}
+            //判断是否移动 刚开始设为false
+            var isTouchMove=false;
+            el.addEventListener('touchstart',handleStart,false)
+            el.addEventListener('touchmove',handleMove,false)
+            el.addEventListener('touchend',handleEnd,false)
+            function handleStart(ev){
+            // console.log('touchstart',ev);
+            var touch=ev.changedTouchs[0]
+            //获取刚开始的坐标
+            startPoint.x=touch.pageX
+            startPoint.y=touch.pageY
+
+            }
+            function handleMove(ev){
+                var touch=ev.changedTouchs[0]
+                isTouchMove=true
+                //阻止默认行为
+                ev.preventDefault();
+                //计算差值
+                var diffPoint={};
+                var movePoint={
+                    x:0,y:0
+                }
+                diffPoint.x=touch.pageX-startPoint.x
+                diffPoint.y=touch.pageY-startPoint.y
+                
+                if(options.x){
+                    movePoint.x=diffPoint.x+curPoint.x
+                }
+                if(options.y){
+                    movePoint.y=diffPoint.y+curPoint.y
+                }
+                move(el,diffPoint.x,diffPoint.y)
+            }
+            function handleEnd(ev){
+               //更新当前位置
+               var touch=ev.changedTouchs[0]
+               if(isTouchMove){
+                curPoint.x+=touch.pageX-startPoint.x
+                curPoint.y+=touch.pageY-startPoint.y
+               }else{
+                return;
+               }
+               isTouchMove=false
+            }
+            function move(el,x,y){
+            x=x||0;
+            y=y||0;
+            el.style.transform='translate3d('+x+'px,'+y+'px,0'+')'
+          }
+       }
+            
+    </script>
+</body>
+</html>
