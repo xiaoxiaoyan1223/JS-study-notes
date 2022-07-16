@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./slider.css">
+</head>
+<body>
+    <div class="slider" id="slider">
+        <div class="slider-item-container">
+            <div class="slider-item">
+                <a href="" class="slider-link">
+                    <img src="../../images/千玺.jpg" alt="slider" class="slider-img">
+                </a>
+            </div>
+            <div class="slider-item">
+                <a href="" class="slider-link">
+                    <img src="../../images/小凯.jpg" alt="slider" class="slider-img">
+                </a>
+            </div>
+            <div class="slider-item">
+                <a href="" class="slider-link">
+                    <img src="../../images/小源.jpg" alt="slider" class="slider-img">
+                </a>
+            </div>
+        </div>
+        <!-- <div class="slider-indicator-container">
+            <div class="slider-indicator slider-indicator-active"></div>
+            <div class="slider-indicator"></div>
+            <div class="slider-indicator"></div>
+        </div> -->
+    </div>
+    <script src="./slider.js"></script>
+    <script src="../hammer.js"></script>
+    <script>
+        var slider=new Slider(document.getElementById('slider'),{
+            initIndex:0,
+            speed:300,
+            hasIndicator:true
+        });
+        var hammer=new Hammer(slider.getItemContainer())
+        // 阻止触发多个事件
+        var isSwiping=false;
+        hammer.on('panmove',function(ev){
+            var distance=ev.ev.deltaX+slider.getDistanceByIndex(slider.getIndex())
+            slider.move(distance)
+        })
+        hammer.on('panend',function(ev){
+            //如果为真则不执行这个动画
+            if(isSwiping) return;
+            var index=0;
+            var distance=ev.ev.deltaX+slider.getDistanceByIndex(slider.getIndex())
+            var index=getIndexByDistance(distance)
+            slider.to(index)
+            })
+        //根据容器移动的距离来获得索引
+        function getIndexByDistance(distance){
+            if(distance>0){
+                return 0
+            }else{
+                return Math.round(-distance/slider.getDistancePerSlider())
+            }
+        }
+        //左右移动
+        hammer.on('swipeleft',function(ev){
+            isSwiping=true
+            slider.nex(function(){
+                isSwiping=false
+            })
+        })
+        hammer.on('swiperight',function(ev){
+            isSwiping=true
+            slider.pre(function(){
+                isSwiping=false
+            })
+        })
+    </script>
+</body>
+</html>
