@@ -1,0 +1,13 @@
+#js的作用
+#表单动态校验(最初产生的原因)
+#网页特效
+#服务端开发（node.js)
+#桌面程序(Electron)
+#App(Cordova)
+#控制硬件-物联网(Ruff)
+#游戏开发(cocos2d-js)
+
+#js组成：
+ECMAScript——JavaScript语法
+DOM——页面文档对象模型
+BOM——浏览器对象模型
