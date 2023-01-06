@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        1.event就是一个事件对象，写到侦听函数的小括号里当形参来看
+        2.事件对象只有有了事件才会存在，它是系统自动给我们创造的，不需要我们传递参数
+        3.事件对象是一系列相关数据的集合 比如点击事件就包含鼠标的坐标之类
+        4.这个对象我们可以自己命名event evt e
+        注意 IE678不认识event  只认识window.event
+        所以兼容性:e=e||window.event
+    </p>
+    <script>
+        var p=document.querySelector('p')
+        p.addEventListener('click',function(e){
+            console.log(e);
+        })
+    </script>
+</body>
+</html>
