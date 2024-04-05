@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            background: url('./img/loading.gif') no-repeat center;
+            width: 250px;
+            height: 250px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./img/pixel.gif" data-url="./img/1.jpeg">
+    <img src="./img/pixel.gif" data-url="./img/2.jfif">
+    <img src="./img/pixel.gif" data-url="./img/3.jfif">
+    <img src="./img/pixel.gif" data-url="./img/4.jfif">
+    <img src="./img/pixel.gif" data-url="./img/5.jfif">
+    <img src="./img/pixel.gif" data-url="./img/6.webp">
+
+    <script>
+        // 方法一：滚动监听+scrollTop+offsetTop+innerHeight
+        let imgs = document.getElementsByTagName('img')
+        // 1. 一上来立即执行一次
+        fn()
+        // 2. 监听滚动事件
+        window.onscroll = lazyload(fn, true)
+        function fn() {
+            // 获取视口高度和内容的偏移量
+            let clietH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            console.log(clietH, scrollTop);
+            for (let i = 0; i < imgs.length; i++) {
+                let x = scrollTop + clietH - imgs[i].offsetTop //当内容的偏移量+视口高度>图片距离内容顶部的偏移量时，说明图片在视口内
+                if (x > 0) {
+                    imgs[i].src = imgs[i].getAttribute('data-url'); //从dataurl中取出真实的图片地址赋值给url
+                }
+            }
+        }
+          // 函数节流
+        function lazyload(fn, immediate) {
+            let timer = null
+            return function () {
+                let context = this;
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn.apply(this)
+                        timer = null
+                    }, 200)
+                }
+            }
+        }
+    // 滚动监听+getBoundingClientRect()
+     let imgs = document.getElementsByTagName('img')
+        // 1. 一上来立即执行一次
+        fn()
+        // 2. 监听滚动事件
+        window.onscroll = lazyload(fn, true)
+        function fn() {
+            // 获取视口高度和内容的偏移量
+            let offsetHeight = window.innerHeight || document.documentElement.clientHeight
+            Array.from(imgs).forEach((item, index) => {
+                let oBounding = item.getBoundingClientRect() //返回一个矩形对象，包含上下左右的偏移值
+                console.log(index, oBounding.top, offsetHeight);
+                if (0 <= oBounding.top && oBounding.top <= offsetHeight) {
+                    item.setAttribute('src', item.getAttribute('data-url'))
+                }
+            })
+        }
+        // 函数节流
+        function lazyload(fn, immediate) {
+            let timer = null
+            return function () {
+                let context = this;
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn.apply(this)
+                        timer = null
+                    }, 200)
+                }
+            }
+        }
+    // 方法三-intersectionObserve()
+      let imgs = document.getElementsByTagName('img')
+        // 1. 一上来立即执行一次
+        let io = new IntersectionObserver(function (entires) {
+            //图片进入视口时就执行回调
+            entires.forEach(item => {
+                // 获取目标元素
+                let oImg = item.target
+                // console.log(item);
+                // 当图片进入视口的时候，就赋值图片的真实地址
+                if (item.intersectionRatio > 0 && item.intersectionRatio <= 1) {
+                    oImg.setAttribute('src', oImg.getAttribute('data-url'))
+                }
+            })
+        })
+        Array.from(imgs).forEach(element => {
+            io.observe(element)  //给每一个图片设置监听
+        });
+    </script>
+</body>
+
+</html>
