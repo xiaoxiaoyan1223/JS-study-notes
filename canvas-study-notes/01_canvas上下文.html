@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        id:标识元素的唯一性
+        width:画布的宽度
+        height:画布的高度
+        style:样式
+     -->
+     <canvas id="cl" width="600" height="400" style="border: 1px solid #000;"></canvas>
+     <script>
+        // 获取画布元素
+        var canvas = document.getElementById('cl');
+        // 判断是否有getContext方法
+        if(canvas.getContext){
+            console.log('支持');
+        }else{
+            console.log('当前浏览器不支持canvas');
+        }
+        // 获取上下文对象
+        var ctx = canvas.getContext('2d');
+        // 3.1绘制矩形fillRect(x,y,width,height)
+        ctx.fillRect(100,200,300,300);
+        // 3.2绘制矩形strokeRect(x,y,width,height)
+     </script>
+</body>
+</html>

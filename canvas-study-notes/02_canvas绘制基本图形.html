@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="cl" width="600" height="800" style="border: 1px solid #000;"></canvas>
+     <script>
+        // 获取画布元素
+        var canvas = document.getElementById('cl');
+        // 判断是否有getContext方法
+        if(canvas.getContext){
+            console.log('支持');
+        }else{
+            console.log('当前浏览器不支持canvas');
+        }
+        // 获取上下文对象
+        var ctx = canvas.getContext('2d');
+        // 3.1绘制矩形fillRect(x,y,width,height)
+        ctx.fillRect(0,0,300,300);
+        // 3.2绘制矩形strokeRect(x,y,width,height)
+        ctx.strokeRect(100,100,300,300);
+        // 3.3清除指定区域
+        ctx.clearRect(100,100,100,100);
+        // 设置定时器清除
+        let height=0;
+        let t1=setInterval(function(){
+            height++
+            ctx.clearRect(0,0,canvas.clientHeight,height);
+           if(height>cl.clientHeight){
+            clearInterval(t1)
+           }
+        },1000)
+          // 绘制一条直线
+          ctx.moveTo(100, 100);
+        ctx.lineTo(100, 150);
+        ctx.stroke();
+        // 改变颜色
+        ctx.strokeStyle = 'red';
+        ctx.stroke();
+        // 改变颜色宽度
+        ctx.lineWidth = 5;
+        ctx.stroke();
+        // 绘制一个圆
+        ctx.beginPath();
+        ctx.arc(300, 400, 50, 0, Math.PI * 2, true);
+        ctx.stroke();
+        // 绘制一个圆形
+        ctx.beginPath();
+        ctx.arc(100, 300, 50, 0, Math.PI * 2, true);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+        ctx.stroke()
+        // 绘制一个矩形
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(100, 400, 100, 100);
+        // 绘制一个三角形
+        ctx.beginPath();   
+        ctx.moveTo(200, 200);
+        ctx.lineTo(100, 200);
+        ctx.lineTo(200, 100);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+        // 绘制一个文字
+        // ctx.font = '20px Arial';
+        // ctx.fillText('Hello', 100, 100);
+        ctx.font='50px 楷体';
+        ctx.lineWidth = 1;
+        ctx.strokeText('河南理工大学', 300, 100);
+       
+        // 绘制一个图片
+        var img = new Image();
+        img.src = 'image.jpg';
+        img.onload = function() {
+            ctx.drawImage(img, 100, 100, 100, 100);
+        }
+        
+     </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="clock" width="800" height="800"></canvas>
+    <script>
+        var clock = document.getElementById('clock');
+        var ctx = clock.getContext('2d');
+
+        setInterval(drawClock, 1000);
+        function drawClock() {
+            ctx.clearRect(0, 0, clock.width, clock.height);
+            // 绘制表盘
+            ctx.beginPath();
+            ctx.arc(400, 400, 300, 0, Math.PI * 2, true);
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            ctx.closePath();
+
+            // 绘制刻度
+            for (var i = 0; i < 12; i++) {
+                ctx.save();
+                ctx.translate(400, 400);
+                ctx.rotate(i * Math.PI / 6);
+                ctx.beginPath();
+                ctx.moveTo(0, -280);
+                ctx.lineTo(0, -295);
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+                // ctx.closePath();
+            }
+            for (var i = 0; i < 120; i++) {
+                ctx.save();
+                ctx.translate(400, 400);
+                ctx.rotate(i * Math.PI / 60);
+                ctx.beginPath();
+                ctx.moveTo(0, -280);
+                ctx.lineTo(0, -290);
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+                // ctx.closePath();
+            }
+            var hour = new Date().getHours();
+            var minute = new Date().getMinutes();
+            var second = new Date().getSeconds();
+            hour >= 12 ? hour -= 12 : hour;
+
+
+            // 绘制中心点
+            ctx.beginPath();
+            ctx.arc(400, 400, 5, 0, Math.PI * 2, true);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+            ctx.closePath();
+            // 绘制时针
+            ctx.save();
+            ctx.translate(400, 400);
+            ctx.rotate(hour * Math.PI / 6 + minute * Math.PI / 360);
+            ctx.beginPath();
+            ctx.moveTo(-10, 0);
+            ctx.lineTo(200, 0);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+            // ctx.closePath();
+            // 绘制分针
+            ctx.save();
+            ctx.translate(400, 400);
+            ctx.rotate(minute * Math.PI / 30 + second * Math.PI / 1800);
+            ctx.beginPath();
+            ctx.moveTo(-10, 0);
+            ctx.lineTo(220, 0);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+            // ctx.closePath();
+            // 绘制秒针
+            ctx.save();
+            ctx.translate(400, 400);
+            ctx.rotate(second * Math.PI / 30);
+            ctx.beginPath();
+            ctx.moveTo(-10, 0);
+            ctx.lineTo(240, 0);
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+        }
+
+
+    </script>
+</body>
+
+</html>
