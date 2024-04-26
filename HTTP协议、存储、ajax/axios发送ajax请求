@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* 第一步 */
+            display: flex;
+            height: 1000px;
+        }
+
+        .con {
+            width: 500px;
+            height: 500px;
+            background: pink;
+            /* 第二步 */
+            margin: auto;
+        }
+
+        .small-font {
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+            transform: scale(0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con">快速居中对齐</div>
+    <div class="small-font">如何让谷歌支持小字体</div>
+    <button>axios发送ajax请求</button>
+    <script>
+    
+        btn=document.querySelector('button');
+        btn.onclick=function(){
+            // 方法一 第一个参数是请求的地址 第二个参数是请求体,第三个参数是回调函数
+            axios.get('http://127.0.0.1:8000/axios',{
+                // url参数
+                params:{
+                    name:'zs',
+                    age:18
+                },
+                // 请求头信息
+                headers:{
+                    height:'180',
+                    weight:'180'
+                }
+            }).then(
+                response=>{
+                    console.log(response.data);
+                },
+                error=>{
+                    console.log(error);
+                })
+            axios.post('http://127.0.0.1:8000/axios',{
+                // 请求体参数
+                name:'zs',
+                age:18
+            },{
+                // url参数
+                params:{
+                    height:'180',
+                    weight:'180'
+                },
+                // 请求头信息
+                headers:{
+                    height:'180',
+                    weight:'180'
+                }   
+            })
+        }
+        // 方法二用axios函数
+        axios({
+            
+            method:'get',
+            url:'http://127.0.0.1:8000/axios',
+            // get方法没有办法携带请求体参数,只能携带url参数
+            params:{
+                name:'zs',
+                age:18
+            },
+            headers:{
+                height:'180',
+                weight:'180'
+            }
+        })
+        axios({
+            method:'post',
+            url:'http://127.0.0.1:8000/axios',
+            // 请求体参数
+            data:{
+                name:'zs',
+                age:18  
+            },
+            params:{
+                height:'180',
+                weight:'180'
+            },
+            headers:{
+                height:'180',
+                weight:'180'
+            }
+
+        })
+    </script>
+</body>
+
+</html>
