@@ -1,0 +1,53 @@
+
+<script>
+//生成器其实就是一个特殊的函数
+//异步编程 纯回调函数nodefs ajax mongodb
+//函数代码的分隔符
+  function * gen(){
+    console.1og(111);
+    yield'一只没有耳朵'; 
+    console.1og(222);
+    yield'一只没有尾部';
+    console.1og(333);
+    yield'真奇怪';
+    console.1og(444);
+// let iterator = gen();
+// iterator.next();
+// iterator.next();
+// iterator.next();
+// iterator.next();
+//遍历
+for(let v of gen()){
+console.log(v);
+}
+
+//  解决异步回调
+function one(){
+  setTimeout(()=>{
+  console.log(111)
+  iterator.next();
+  },1000)
+}
+function two(){
+  setTimeout(()=>{
+  console.log(222);
+  iterator.next();
+  },2000)
+}
+function three(){
+  setTimeout(()=>{
+    console.log(333);
+    iterator.next();
+ },3000)
+}
+function * gen(){
+  yield one()
+  yield two()
+  yield three()
+}
+
+// 调用生成器函数
+let iterator=gen()
+iterator.next()
+// 输出结果一秒打印一个数据
+  </script>
