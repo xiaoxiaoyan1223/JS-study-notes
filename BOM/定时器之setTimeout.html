@@ -22,6 +22,26 @@
     <div class="hour"></div>
     <div class="minute"></div>
     <div class="second"></div>
+    <p>
+        原理：
+        setTimeout：这个函数会将要执行的代码或函数放入事件循环队列中，等待当前代码执行完毕后，再等待指定的时间后执行一次。如果设置了定时器，那么每隔一定时间就会执行一次代码，直到 clearTimeout 被调用或窗口被关闭。
+        
+        setInterval：与 setTimeout 类似，setInterval 也会将要执行的代码或函数放入事件循环队列中，但它在指定的时间间隔后会一直重复执行，直到 clearInterval 被调用或窗口被关闭。也就是说，setInterval 会不断地调用函数，直到被取消。
+        
+        requestAnimationFrame：这个函数的工作原理与 setInterval 和 setTimeout 略有不同。它会将回调函数加入到浏览器下一次重绘之前要执行的队列中。这样做的目的是为了确保动画的流畅度，因为浏览器会自动优化这个API，只在浏览器处于激活状态并且页面处于可见状态时才会执行回调函数。此外，requestAnimationFrame 会根据系统的刷新率来自动匹配时间间隔，从而确保每帧动画的间隔时间尽可能地准确。
+    </p>
+    <p>
+        区别：
+        执行时机：requestAnimationFrame是由浏览器提供的API，它会在浏览器下一次重绘之前执行回调函数。这意味着它能够确保动画的流畅度，并且能够自动匹配系统的刷新率。相比之下，setInterval和setTimeout会在指定的时间间隔后执行回调函数，无论浏览器是否处于激活状态或正在进行其他操作。
+
+        性能优化：requestAnimationFrame由浏览器自动优化，只在浏览器处于激活状态并且页面处于可见状态时才会执行回调函数。这可以节省CPU、GPU和内存的使用，特别是在移动设备上。相比之下，setInterval和setTimeout不会自动优化，如果页面处于隐藏或不可见状态，它们会继续执行回调函数，这可能会导致资源的浪费。
+
+        回调函数执行时间：requestAnimationFrame的回调函数会在浏览器下一次重绘之前执行，因此它能够确保回调函数的执行时间相对准确。相比之下，setInterval和setTimeout的回调函数执行时间取决于浏览器事件循环中的队列和执行时间，因此可能会有一定的延迟。
+
+        停止操作：requestAnimationFrame的回调函数只会在浏览器下一次重绘之前执行一次，因此可以通过清除队列中的回调函数来停止操作。相比之下，setInterval和setTimeout会不断地执行回调函数，直到clearInterval或clearTimeout被调用或关闭页面为止。
+
+        函数节流：在高频率事件(resize,scroll等)中，为了防止在一个刷新间隔内发生多次函数执行，使用requestAnimationFrame可保证每个刷新间隔内，函数只被执行一次，这样既能保证流畅性，也能更好的节省函数执行的开销。
+    </p>
     <!-- <button>点击停止定时器</button> -->
 <script>
     //1、setTimeout()只调用一次
